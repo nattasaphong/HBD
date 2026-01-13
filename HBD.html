@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Baby 🎂</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
+    background-size: 400% 400%;
+    animation: bgMove 14s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+@keyframes bgMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.card {
+    background: white;
+    width: 360px;
+    padding: 25px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(255,100,150,0.35);
+    z-index: 2;
+}
+
+h1 { color:#ff5fa2; margin:0; }
+h2 { color:#ff7fbf; margin:5px 0 10px; }
+
+.slider {
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin: 15px 0;
+}
+
+.slides {
+    display: flex;
+    width: 700%;
+    height: 100%;
+    transition: transform 2.8s ease-in-out;
+}
+
+.slides img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+    margin-top: 15px;
+    line-height: 1.6;
+    opacity: 1;
+    transition: opacity 1.2s ease;
+}
+
+.fade {
+    opacity: 0;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h1>🎂 Happy Birthday</h1>
+    <h2>Baby 🎀</h2>
+
+    <div class="slider">
+        <div class="slides" id="slides">
+            <img src="img1.jpg">
+            <img src="img2.jpg">
+            <img src="img3.jpg">
+            <img src="img4.jpg">
+            <img src="img5.jpg">
+            <img src="img6.jpg">
+            <img src="img7.jpg">
+        </div>
+    </div>
+
+    <p id="text"></p>
+</div>
+
+<script>
+const slides = document.getElementById("slides");
+const text = document.getElementById("text");
+
+const texts = [
+    "สุขสันต์วันเกิดนะ Baby 🎉 ขอให้วันนี้เต็มไปด้วยรอยยิ้ม ✨",
+    "ขอให้ทุกวันที่ตื่นมา เจอแต่เรื่องดี ๆ 😊",
+    "ขอให้ความฝันที่ตั้งใจ ค่อย ๆ เป็นจริง ⭐",
+    "ขอให้มีคนใจดี อยู่รอบตัวเสมอ 🌸",
+    "ขอให้สุขภาพแข็งแรง หัวเราะได้ทุกวัน 🎈",
+    "ขอให้ปีนี้เป็นปีที่อบอุ่นและน่าจดจำ 💫",
+    "Happy Birthday Baby 🎂 ขอให้มีความสุขมาก ๆ"
+];
+
+let index = 0;
+
+const READ_TIME = 4000;   // ⏸ หยุดอ่าน
+const MOVE_TIME = 2800;  // ➡️ เวลาเลื่อนรูป
+
+function runSlide() {
+
+    // 1️⃣ แสดงรูป + ข้อความ
+    slides.style.transform = `translateX(${-index * 100}%)`;
+    text.innerText = texts[index];
+    text.classList.remove("fade");
+
+    // 2️⃣ หยุดให้อ่าน
+    setTimeout(() => {
+        text.classList.add("fade");
+
+        // 3️⃣ หลัง fade เสร็จ → เปลี่ยน index + เลื่อนรูป
+        setTimeout(() => {
+            index = (index + 1) % texts.length;
+            runSlide();
+        }, MOVE_TIME);
+
+    }, READ_TIME);
+}
+
+// เริ่มทำงาน
+runSlide();
+</script>
+
+</body>
+</html>
